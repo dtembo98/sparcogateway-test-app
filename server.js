@@ -11,17 +11,18 @@ const { json } = require('express');
 //  const SEC_KEY = '<MERCHANT_SECRET_KEY>';
 //  const PUB_KEY = '<MERCHANT_PUBLIC_KEY>';
 
+//USE THE DETAILS USED TO CREATE AN ACCOUNT ON SPARCO
 const payload = {
-	amount: 0.3,
+	amount: 1,
 	currency: 'ZMW',
-	customerEmail: 'david@broadpay.co.zm',
-	customerFirstName: 'David',
-	customerLastName: 'Tembo',
-	customerPhone: '0979789839',
+	customerEmail: '',
+	customerFirstName: '',
+	customerLastName: '',
+	customerPhone: '',
 	merchantPublicKey: process.env.MERCHANT_PUBLIC_KEY,
 	transactionName: 'Service/product',
 	transactionReference: uuid(),
-	wallet: '0963912233',
+	wallet: '',
 	chargeMe: false,
 };
 
@@ -45,6 +46,7 @@ app.get('/', (req, res) => {
 	);
 });
 
+//collect
 app.get('/debit', async (req, res) => {
 	try {
 		const results = await axios.post(endpoint_debit, {
@@ -59,6 +61,8 @@ app.get('/debit', async (req, res) => {
 		res.send(`<h3 style= "color:red;">${err.response.data.message} </h3>`);
 	}
 });
+
+//disburse
 app.get('/credit', async (req, res) => {
 	try {
 		const results = await axios.post(endpoint_credit, {
